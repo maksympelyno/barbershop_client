@@ -1,0 +1,9 @@
+<div class="p-6">
+  <h2 class="text-2xl font-bold text-black mb-4">Haircuts</h2>
+  <div class="flex flex-wrap gap-4 justify-center">
+    <app-haircut-item
+      *ngFor="let haircut of haircuts"
+      [haircut]="haircut"
+    ></app-haircut-item>
+  </div>
+</div>

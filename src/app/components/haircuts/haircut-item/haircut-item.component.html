@@ -1,0 +1,14 @@
+<!-- Haircut Item Component -->
+<div
+  class="bg-gray-800 shadow-md rounded-md p-3 border border-gray-700 mx-2 my-2 text-sm text-white w-64 transition transform hover:scale-101"
+>
+  <h3 class="text-md font-semibold text-gray-300 text-center mb-2">
+    {{ haircut.name }}
+  </h3>
+  <p class="text-md font-bold text-gold text-center mb-2">
+    {{ haircut.price }}$
+  </p>
+  <p class="text-xs text-gray-400 text-center">
+    <strong>Gender:</strong> {{ haircut.gender === "male" ? "Male" : "Female" }}
+  </p>
+</div>

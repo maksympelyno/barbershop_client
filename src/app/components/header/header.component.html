@@ -1,0 +1,112 @@
+<header
+  class="bg-black text-white p-4 shadow-md flex justify-between items-center"
+>
+  <div class="flex items-center gap-4">
+    <!-- Бургер-іконка (зліва) -->
+    <button
+      class="lg:hidden text-white hover:text-yellow-300 focus:outline-none text-2xl"
+      (click)="toggleMenu()"
+    >
+      ☰
+    </button>
+
+    <!-- Назва -->
+    <h1
+      routerLink="/main"
+      class="text-xl font-bold cursor-pointer hover:text-gray-200"
+    >
+      Barbershop Management
+    </h1>
+  </div>
+
+  <div *ngIf="currentUser()" class="flex items-center gap-4">
+    <!-- Навігація (завжди показується на великих екранах) -->
+    <nav class="hidden lg:flex gap-4">
+      <a
+        routerLink="/clients"
+        routerLinkActive="text-gray-100 border-b-2 border-yellow-100"
+        class="hover:text-gray-200 transition-all duration-300 px-2"
+      >
+        Clients
+      </a>
+      <a
+        routerLink="/visits"
+        routerLinkActive="text-gray-100 border-b-2 "
+        class="hover:text-gray-200 transition-all duration-300 px-2"
+      >
+        Visits
+      </a>
+      <a
+        routerLink="/haircuts"
+        routerLinkActive="text-gray-100 border-b-2 border-gold"
+        class="hover:text-gray-200 transition-all duration-300 px-2"
+      >
+        Haircuts
+      </a>
+    </nav>
+
+    <span class="text-sm"
+      >Welcome, <b>{{ currentUser()?.name }}</b></span
+    >
+
+    <button
+      (click)="logout()"
+      class="bg-gray-700 px-3 py-1 rounded-md hover:bg-yellow-300 hover:text-black transition-all duration-300 flex items-center justify-center"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="w-4 h-4 text-white"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M13 5l7 7-7 7M4 12h16M24 4v16"
+        />
+      </svg>
+    </button>
+  </div>
+
+  <!-- Випадаюче меню для мобільних -->
+  <div
+    class="fixed top-0 left-0 h-full w-64 bg-black text-white shadow-lg transform transition-transform duration-300 ease-in-out z-1"
+    [ngClass]="{
+      '-translate-x-full': !isMenuOpen,
+      'translate-x-0': isMenuOpen
+    }"
+  >
+    <button
+      class="absolute top-4 right-4 text-white hover:text-yellow-300 text-2xl"
+      (click)="toggleMenu()"
+    >
+      ✕
+    </button>
+
+    <nav class="flex flex-col gap-4 p-6 mt-10">
+      <a
+        routerLink="/clients"
+        (click)="toggleMenu()"
+        class="hover:text-yellow-300 transition-all duration-300"
+      >
+        Clients
+      </a>
+      <a
+        routerLink="/visits"
+        (click)="toggleMenu()"
+        class="hover:text-yellow-300 transition-all duration-300"
+      >
+        Visits
+      </a>
+      <a
+        routerLink="/haircuts"
+        (click)="toggleMenu()"
+        class="hover:text-yellow-300 transition-all duration-300"
+      >
+        Haircuts
+      </a>
+    </nav>
+  </div>
+</header>

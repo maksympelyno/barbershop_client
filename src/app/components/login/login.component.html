@@ -1,0 +1,83 @@
+<div class="flex justify-center items-center h-screen bg-black">
+  <div class="w-full max-w-md bg-gray-800 p-8 rounded-lg shadow-lg">
+    <h2 class="text-2xl font-bold text-center text-white mb-4">Login</h2>
+
+    <form
+      *ngIf="showLoginForm"
+      [formGroup]="loginForm"
+      (ngSubmit)="onSubmit()"
+      class="transition-all duration-500 ease-in-out"
+    >
+      <!-- Email -->
+      <div>
+        <label class="block text-sm font-medium text-white">Email</label>
+        <input
+          type="email"
+          formControlName="email"
+          class="mt-1 w-full p-2 border border-gray-600 rounded-md bg-gray-700 text-white focus:ring"
+          placeholder="you@example.com"
+        />
+        <p
+          *ngIf="email?.invalid && email?.touched"
+          class="text-red-500 text-xs"
+        >
+          Valid email is required.
+        </p>
+      </div>
+
+      <!-- Password -->
+      <div class="mt-4">
+        <label class="block text-sm font-medium text-white">Password</label>
+        <input
+          type="password"
+          formControlName="password"
+          class="mt-1 w-full p-2 border border-gray-600 rounded-md bg-gray-700 text-white focus:ring"
+          placeholder="••••••••"
+        />
+        <p
+          *ngIf="password?.invalid && password?.touched"
+          class="text-red-500 text-xs"
+        >
+          Password is required.
+        </p>
+      </div>
+      <p *ngIf="errorMessage()" class="text-red-500 text-sm mt-2">
+        {{ errorMessage() }}
+      </p>
+      <!-- Submit Button -->
+      <button
+        type="submit"
+        [disabled]="loginForm.invalid"
+        class="mt-6 w-full bg-gray-700 text-white p-2 rounded-md hover:bg-gray-900 transition disabled:opacity-50"
+      >
+        Login
+      </button>
+    </form>
+
+    <!-- Registration Message -->
+    <div
+      *ngIf="!showLoginForm"
+      class="transition-all duration-500 ease-in-out p-4 rounded-lg bg-gray-700 border-l-4 border-yellow-400 shadow-lg mt-6"
+    >
+      <p class="text-center text-gold text-lg font-semibold">
+        <span class="block mb-2"
+          >Please contact the administrator to create an account.</span
+        >
+        <span class="text-sm text-gray-400"
+          >We will notify you once your account is ready.</span
+        >
+      </p>
+    </div>
+
+    <!-- Register Button -->
+    <div class="text-center mt-4">
+      <button
+        type="button"
+        (click)="toggleForm()"
+        class="text-white hover:text-gold transition-all duration-300 ease-in-out"
+      >
+        {{ showLoginForm ? "Register" : "Back to Login" }}
+      </button>
+    </div>
+  </div>
+</div>

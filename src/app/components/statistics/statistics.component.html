@@ -1,0 +1,20 @@
+<div class="p-6">
+  <h2 class="text-2xl font-bold text-black mb-4">Statistics</h2>
+
+  <label class="block text-white mb-2 text-sm">Select Branch:</label>
+  <select
+    class="bg-gray-800 border border-gray-700 text-white p-1 text-sm rounded-md w-48 cursor-pointer"
+    (change)="onBranchChange($event)"
+  >
+    <option value="" disabled selected>Choose a branch</option>
+    <option *ngFor="let branch of branches()" [value]="branch._id">
+      {{ branch.name }}
+    </option>
+  </select>
+
+  <div *ngIf="selectedBranchId()">
+    <app-statistics-branch
+      [branchId]="selectedBranchId()"
+    ></app-statistics-branch>
+  </div>
+</div>
