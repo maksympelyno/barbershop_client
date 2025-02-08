@@ -1,14 +1,56 @@
-<!-- Haircut Item Component -->
 <div
-  class="bg-gray-800 shadow-md rounded-md p-3 border border-gray-700 mx-2 my-2 text-sm text-white w-64 transition transform hover:scale-101"
+  class="bg-gray-800 shadow-md rounded-md p-3 border border-gray-700 mx-2 my-2 text-sm text-white w-64 transition transform hover:scale-101 relative flex flex-col justify-between"
 >
-  <h3 class="text-md font-semibold text-gray-300 text-center mb-2">
-    {{ haircut.name }}
-  </h3>
-  <p class="text-md font-bold text-gold text-center mb-2">
-    {{ haircut.price }}$
-  </p>
-  <p class="text-xs text-gray-400 text-center">
+  <button
+    *ngIf="!isEditing"
+    (click)="toggleEdit()"
+    class="absolute top-2 right-2 text-gray-400 hover:text-white transition text-xs"
+  >
+    ✏️
+  </button>
+
+  <div class="text-center mt-4">
+    <ng-container *ngIf="isEditing; else viewModeName">
+      <input
+        type="text"
+        [(ngModel)]="editableHaircut.name"
+        class="bg-gray-700 text-white p-1 rounded-md w-full text-center"
+      />
+    </ng-container>
+    <ng-template #viewModeName>
+      <h3 class="text-md font-semibold text-gray-300">{{ haircut.name }}</h3>
+    </ng-template>
+  </div>
+
+  <div class="text-center mt-2">
+    <ng-container *ngIf="isEditing; else viewModePrice">
+      <input
+        type="number"
+        [(ngModel)]="editableHaircut.price"
+        class="bg-gray-700 text-white p-1 rounded-md w-full text-center"
+      />
+    </ng-container>
+    <ng-template #viewModePrice>
+      <p class="text-md font-bold text-gold">{{ haircut.price }}$</p>
+    </ng-template>
+  </div>
+
+  <p class="text-xs text-gray-400 text-center mt-2">
     <strong>Gender:</strong> {{ haircut.gender === "male" ? "Male" : "Female" }}
   </p>
+
+  <div *ngIf="isEditing" class="flex justify-between mt-4">
+    <button
+      (click)="saveChanges()"
+      class="bg-green-500 text-white px-3 py-1 rounded-md text-xs w-1/2 mr-1"
+    >
+      ✅ Save
+    </button>
+    <button
+      (click)="toggleEdit()"
+      class="bg-red-500 text-white px-3 py-1 rounded-md text-xs w-1/2"
+    >
+      ❌ Cancel
+    </button>
+  </div>
 </div>
