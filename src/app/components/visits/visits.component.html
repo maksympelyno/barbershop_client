@@ -1,4 +1,37 @@
 <div class="container mx-auto p-6">
-  <h2 class="text-2xl font-bold text-black mb-4">Visits</h2>
-  <app-visit-list [visits]="visits"></app-visit-list>
+  <div class="flex items-center gap-4 mb-4">
+    <h2 class="text-2xl font-bold text-black">Visits</h2>
+
+    <button
+      (click)="openModal()"
+      class="bg-gray-700 hover:bg-gray-900 text-white px-2 py-1 rounded-lg text-lg transition"
+    >
+      Create Visit
+    </button>
+  </div>
+
+  <app-visit-list [visits]="paginatedVisits"></app-visit-list>
+
+  <div class="flex justify-center mt-4 gap-4">
+    <button
+      (click)="prevPage()"
+      [disabled]="page() === 1"
+      class="bg-gray-500 hover:bg-gray-700 text-white px-3 py-1 rounded disabled:opacity-50"
+    >
+      Previous
+    </button>
+    <span class="text-lg font-semibold">{{ page() }}</span>
+    <button
+      (click)="nextPage()"
+      [disabled]="page() >= totalPages()"
+      class="bg-gray-500 hover:bg-gray-700 text-white px-3 py-1 rounded disabled:opacity-50"
+    >
+      Next
+    </button>
+  </div>
+
+  <app-add-visit-modal
+    *ngIf="isModalOpen"
+    (close)="closeModal()"
+  ></app-add-visit-modal>
 </div>

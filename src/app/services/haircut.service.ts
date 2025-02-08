@@ -1,5 +1,6 @@
 import { Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -25,5 +26,17 @@ export class HaircutsService {
     this.http.patch(`${this.baseUrl}/${id}`, updatedHaircut).subscribe(() => {
       this.getHaircuts();
     });
+  }
+
+  searchHaircuts(name: string): Observable<any[]> {
+    const branchId = '67a21f6d48802d6c26909a87';
+    return this.http.get<any[]>(
+      `${this.baseUrl}/branch/${branchId}?name=${name}`
+    );
+  }
+
+  getHaircutsByBranch(): Observable<any[]> {
+    const branchId = '67a21f6d48802d6c26909a87';
+    return this.http.get<any[]>(`${this.baseUrl}/branch/${branchId}`);
   }
 }

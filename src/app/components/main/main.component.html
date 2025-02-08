@@ -1,4 +1,101 @@
-<div class="p-8">
-  <h2 class="text-2xl font-bold">Welcome to the Main Page</h2>
-  <p class="mt-4 text-gray-700">This is your dashboard after logging in.</p>
+<div class="p-8 bg-gray-100 min-h-screen">
+  <div class="max-w-4xl mx-auto bg-white shadow-lg rounded-2xl p-6">
+    <h2 class="text-3xl font-bold text-gray-900">
+      Barbershop Manager Dashboard
+    </h2>
+    <p class="mt-3 text-gray-600">
+      Welcome back! Here you can manage client visits, catalogue of haircuts,
+      and analyze business performance.
+    </p>
+
+    <div class="mt-6 grid grid-cols-2 gap-6">
+      <div
+        class="bg-gray-800 hover:bg-gray-900 text-white p-4 rounded-xl flex items-center justify-between transition"
+        [routerLink]="'/haircuts'"
+      >
+        <div>
+          <h3 class="text-lg font-semibold">Haircuts</h3>
+          <p class="text-sm text-gray-300">
+            View and and new haircuts to catalogue
+          </p>
+        </div>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M12 5v14M5 12h14"></path>
+        </svg>
+      </div>
+
+      <div
+        class="bg-gray-800 hover:bg-gray-900 text-white p-4 rounded-xl flex items-center justify-between transition"
+        [routerLink]="'/visits'"
+      >
+        <div>
+          <h3 class="text-lg font-semibold">Visits</h3>
+          <p class="text-sm text-gray-300">View and manage all visits(jobs)</p>
+        </div>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M3 6h18M3 12h18M3 18h18"></path>
+        </svg>
+      </div>
+
+      <div
+        class="bg-gray-800 hover:bg-gray-900 text-white p-4 rounded-xl flex items-center justify-between transition"
+        [routerLink]="'/statistics'"
+      >
+        <div>
+          <h3 class="text-lg font-semibold">Analytics</h3>
+          <p class="text-sm text-gray-300">Track revenue and performance</p>
+        </div>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M4 6h16M4 12h8m-8 6h4"></path>
+        </svg>
+      </div>
+
+      <div
+        class="bg-gray-800 hover:bg-gray-900 text-white p-4 rounded-xl flex items-center justify-between transition"
+        [routerLink]="'/clients'"
+      >
+        <div>
+          <h3 class="text-lg font-semibold">Manage Clients</h3>
+          <p class="text-sm text-gray-300">View and add new clients</p>
+        </div>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path
+            d="M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0zm6 8a6 6 0 0 0-12 0"
+          ></path>
+        </svg>
+      </div>
+    </div>
+  </div>
 </div>

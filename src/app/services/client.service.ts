@@ -26,4 +26,12 @@ export class ClientsService {
       })
     );
   }
+
+  searchClients(phone: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/search?phone=${phone}`);
+  }
+
+  getClientsObs(): Observable<any[]> {
+    return this.http.get<any[]>(this.baseUrl);
+  }
 }
