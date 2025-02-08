@@ -24,13 +24,31 @@
 
   <div class="flex flex-wrap gap-4 justify-center">
     <app-haircut-item
-      *ngFor="let haircut of haircuts"
+      *ngFor="let haircut of paginatedHaircuts"
       [haircut]="haircut"
     ></app-haircut-item>
   </div>
-</div>
 
-<app-add-haircut-modal
-  *ngIf="isModalOpen"
-  (close)="closeModal()"
-></app-add-haircut-modal>
+  <div class="flex justify-center mt-4 gap-4">
+    <button
+      (click)="prevPage()"
+      [disabled]="page() === 1"
+      class="bg-gray-500 hover:bg-gray-700 text-white px-3 py-1 rounded disabled:opacity-50"
+    >
+      Previous
+    </button>
+    <span class="text-lg font-semibold">{{ page() }}</span>
+    <button
+      (click)="nextPage()"
+      [disabled]="page() >= totalPages()"
+      class="bg-gray-500 hover:bg-gray-700 text-white px-3 py-1 rounded disabled:opacity-50"
+    >
+      Next
+    </button>
+  </div>
+
+  <app-add-haircut-modal
+    *ngIf="isModalOpen"
+    (close)="closeModal()"
+  ></app-add-haircut-modal>
+</div>
