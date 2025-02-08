@@ -1,0 +1,103 @@
+<div
+  class="flex justify-center items-center fixed inset-0 bg-black bg-opacity-60"
+  (click)="closeOnBlur($event)"
+>
+  <div
+    class="w-full max-w-md bg-gray-800 p-8 rounded-lg shadow-lg"
+    (click)="$event.stopPropagation()"
+  >
+    <h2 class="text-2xl font-bold text-center text-white mb-4">New Client</h2>
+    <p *ngIf="errorMessage()" class="text-red-500 text-xs">
+      Error when adding client.
+    </p>
+    <form [formGroup]="clientForm" (ngSubmit)="addClient()">
+      <div>
+        <label class="block text-sm font-medium text-white">First Name</label>
+        <input
+          type="text"
+          formControlName="firstName"
+          class="mt-1 w-full p-2 border border-gray-600 rounded-md bg-gray-700 text-white focus:ring"
+          placeholder="First Name"
+        />
+        <p
+          *ngIf="firstName?.invalid && firstName?.touched"
+          class="text-red-500 text-xs"
+        >
+          Required.
+        </p>
+      </div>
+
+      <div class="mt-4">
+        <label class="block text-sm font-medium text-white">Last Name</label>
+        <input
+          type="text"
+          formControlName="lastName"
+          class="mt-1 w-full p-2 border border-gray-600 rounded-md bg-gray-700 text-white focus:ring"
+          placeholder="Last Name"
+        />
+        <p
+          *ngIf="lastName?.invalid && lastName?.touched"
+          class="text-red-500 text-xs"
+        >
+          Required.
+        </p>
+      </div>
+
+      <div class="mt-4">
+        <label class="block text-sm font-medium text-white"
+          >Middle Name (Optional)</label
+        >
+        <input
+          type="text"
+          formControlName="middleName"
+          class="mt-1 w-full p-2 border border-gray-600 rounded-md bg-gray-700 text-white focus:ring"
+          placeholder="Middle Name"
+        />
+      </div>
+
+      <div class="mt-4">
+        <label class="block text-sm font-medium text-white">Phone</label>
+        <input
+          type="text"
+          formControlName="phoneNumber"
+          class="mt-1 w-full p-2 border border-gray-600 rounded-md bg-gray-700 text-white focus:ring"
+          placeholder="Phone Number"
+        />
+        <p
+          *ngIf="phoneNumber?.invalid && phoneNumber?.touched"
+          class="text-red-500 text-xs"
+        >
+          Required.
+        </p>
+      </div>
+
+      <div class="mt-4">
+        <label class="block text-sm font-medium text-white">Gender</label>
+        <select
+          formControlName="gender"
+          class="mt-1 w-full p-2 border border-gray-600 rounded-md bg-gray-700 text-white focus:ring"
+        >
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+        </select>
+      </div>
+
+      <div class="flex justify-between mt-6">
+        <button
+          type="button"
+          (click)="close.emit()"
+          class="w-1/3 bg-gray-600 text-white p-2 rounded-md hover:bg-gray-900 transition"
+        >
+          Cancel
+        </button>
+        <button
+          type="submit"
+          [disabled]="clientForm.invalid"
+          class="w-1/3 bg-green-500 text-white p-2 rounded-md hover:bg-green-700 transition disabled:opacity-50"
+        >
+          Add
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
