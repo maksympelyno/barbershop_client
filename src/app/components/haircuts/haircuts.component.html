@@ -1,5 +1,27 @@
 <div class="p-6">
-  <h2 class="text-2xl font-bold text-black mb-4">Haircuts</h2>
+  <div class="flex items-center gap-4 mb-4">
+    <h2 class="text-2xl font-bold text-black">Haircuts</h2>
+    <button
+      class="bg-gray-700 hover:bg-gray-900 text-white px-1 py-1 rounded-lg text-lg transition"
+      (click)="openModal()"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="white"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <line x1="12" y1="5" x2="12" y2="19"></line>
+        <line x1="5" y1="12" x2="19" y2="12"></line>
+      </svg>
+    </button>
+  </div>
+
   <div class="flex flex-wrap gap-4 justify-center">
     <app-haircut-item
       *ngFor="let haircut of haircuts"
@@ -7,3 +29,8 @@
     ></app-haircut-item>
   </div>
 </div>
+
+<app-add-haircut-modal
+  *ngIf="isModalOpen"
+  (close)="closeModal()"
+></app-add-haircut-modal>

@@ -15,4 +15,15 @@ export class HaircutsService {
       .get<any[]>(this.baseUrl)
       .subscribe((data) => this.haircuts.set(data));
   }
+
+  addHaircut(haircut: any) {
+    this.http.post(this.baseUrl, haircut).subscribe(() => {
+      this.getHaircuts();
+    });
+  }
+  updateHaircut(id: string, updatedHaircut: any) {
+    this.http.patch(`${this.baseUrl}/${id}`, updatedHaircut).subscribe(() => {
+      this.getHaircuts();
+    });
+  }
 }
