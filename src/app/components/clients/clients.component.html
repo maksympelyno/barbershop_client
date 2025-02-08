@@ -1,6 +1,33 @@
 <div class="p-6">
-  <h2 class="text-2xl font-bold text-black mb-4">Clients</h2>
+  <div class="flex items-center gap-4 mb-4">
+    <h2 class="text-2xl font-bold text-black">Clients</h2>
+    <button
+      (click)="openModal()"
+      class="bg-gray-700 hover:bg-gray-900 text-white px-1 py-1 rounded-lg text-lg transition"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="white"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <line x1="12" y1="5" x2="12" y2="19"></line>
+        <line x1="5" y1="12" x2="19" y2="12"></line>
+      </svg>
+    </button>
+  </div>
+
   <div *ngFor="let client of clients">
     <app-client-item [client]="client"></app-client-item>
   </div>
 </div>
+
+<app-add-client-modal
+  *ngIf="isModalOpen"
+  (close)="closeModal()"
+></app-add-client-modal>
