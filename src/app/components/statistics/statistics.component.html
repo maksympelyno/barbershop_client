@@ -1,20 +1,102 @@
 <div class="p-6">
   <h2 class="text-2xl font-bold text-black mb-4">Statistics</h2>
 
-  <label class="block text-white mb-2 text-sm">Select Branch:</label>
-  <select
-    class="bg-gray-800 border border-gray-700 text-white p-1 text-sm rounded-md w-48 cursor-pointer"
-    (change)="onBranchChange($event)"
-  >
-    <option value="" disabled selected>Choose a branch</option>
-    <option *ngFor="let branch of branches()" [value]="branch._id">
-      {{ branch.name }}
-    </option>
-  </select>
+  <!-- Tabs -->
+  <div class="flex border-b border-gray-600 mb-4">
+    <button
+      class="py-2 px-4 text-lg font-bold"
+      [ngClass]="{
+        'border-b-2 border-gray-900 text-gray-900':
+          selectedTab() === 'branches',
+        'text-gray-800': selectedTab() !== 'branches'
+      }"
+      (click)="setTab('branches')"
+    >
+      Branches
+    </button>
+    <button
+      class="py-2 px-4 text-lg font-bold"
+      [ngClass]="{
+        'border-b-2 border-gray-900 text-gray-900':
+          selectedTab() === 'haircuts',
+        'text-gray-800': selectedTab() !== 'haircuts'
+      }"
+      (click)="setTab('haircuts')"
+    >
+      Haircuts
+    </button>
+  </div>
 
-  <div *ngIf="selectedBranchId()">
-    <app-statistics-branch
-      [branchId]="selectedBranchId()"
-    ></app-statistics-branch>
+  <!-- Branches Tab -->
+  <div *ngIf="selectedTab() === 'branches'">
+    <label class="block text-black mb-2 text-xl font-bold"
+      >Select Branch:</label
+    >
+    <select
+      class="bg-gray-800 border border-gray-700 text-white p-1 text-sm rounded-md w-48 cursor-pointer"
+      (change)="onBranchChange($event)"
+    >
+      <option value="" disabled selected>Choose a branch</option>
+      <option *ngFor="let branch of branches()" [value]="branch._id">
+        {{ branch.name }}
+      </option>
+    </select>
+
+    <div *ngIf="selectedBranchId()">
+      <app-statistics-branch
+        [branchId]="selectedBranchId()"
+      ></app-statistics-branch>
+    </div>
+  </div>
+
+  <div *ngIf="selectedTab() === 'haircuts'">
+    <label class="block text-black text-xl font-bold"
+      >Select Haircut for price change:</label
+    >
+    <form [formGroup]="form">
+      <div class="mt-4">
+        <label class="block text-sm font-medium text-white"
+          >Search Haircut</label
+        >
+        <div class="flex gap-2">
+          <input
+            type="text"
+            formControlName="haircutSearch"
+            class="w-full p-2 bg-gray-800 text-white rounded-md"
+            placeholder="Enter haircut name..."
+          />
+          <button
+            type="button"
+            (click)="searchHaircuts()"
+            class="bg-blue-500 px-4 py-2 rounded-md text-white"
+          >
+            Search
+          </button>
+        </div>
+
+        <label class="block text-sm font-medium text-white mt-2"
+          >Select Haircut</label
+        >
+        <select
+          class="w-full p-2 bg-gray-800 text-white rounded-md"
+          formControlName="haircutId"
+          (change)="onHaircutSelect()"
+        >
+          <option value="" disabled selected>Choose a haircut</option>
+          <option
+            *ngFor="let haircut of haircutsForSelect()"
+            [value]="haircut._id"
+          >
+            {{ haircut.name }} - {{ haircut.price }}$
+          </option>
+        </select>
+      </div>
+    </form>
+
+    <div *ngIf="priceHistoryData().length > 0" class="mt-6">
+      <app-haircut-price-history
+        [priceHistory]="priceHistoryData()"
+      ></app-haircut-price-history>
+    </div>
   </div>
 </div>

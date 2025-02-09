@@ -39,4 +39,8 @@ export class HaircutsService {
     const branchId = '67a21f6d48802d6c26909a87';
     return this.http.get<any[]>(`${this.baseUrl}/branch/${branchId}`);
   }
+
+  getHaicutsPriceHistory(haircutId: string) {
+    return this.http.get<any[]>(`${this.baseUrl}/price-history/${haircutId}`);
+  }
 }
