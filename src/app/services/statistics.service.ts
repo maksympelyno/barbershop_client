@@ -1,11 +1,12 @@
 import { Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { API_ENDPOINTS, BASE_URL } from '../constants/api-endpoints';
 
 @Injectable({
   providedIn: 'root',
 })
 export class StatisticsService {
-  private baseUrl = 'http://localhost:5000/statistics';
+  private baseUrl = BASE_URL + API_ENDPOINTS.STATISTICS;
 
   revenue = signal<{ revenue: number } | null>(null);
   totalClients = signal<number | null>(null);
@@ -15,7 +16,7 @@ export class StatisticsService {
 
   constructor(private http: HttpClient) {}
 
-  fetchStatistics(branchId: string) {
+  fetchStatistics(branchId: string): void {
     this.http
       .get<{ revenue: number }>(`${this.baseUrl}/${branchId}/revenue`)
       .subscribe((data) => this.revenue.set(data));
@@ -29,7 +30,9 @@ export class StatisticsService {
       .subscribe((data) => this.totalVisits.set(data));
 
     this.http
-      .get<any>(`${this.baseUrl}/${branchId}/popular-haircut`)
+      .get<{ name: string; count: number }>(
+        `${this.baseUrl}/${branchId}/popular-haircut`
+      )
       .subscribe((data) => this.popularHaircut.set(data));
 
     this.http

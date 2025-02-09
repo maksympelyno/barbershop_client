@@ -8,6 +8,7 @@ import {
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -19,6 +20,8 @@ import { AuthService } from '../../services/auth.service';
 export class LoginComponent {
   private authService = inject(AuthService);
   private fb = inject(FormBuilder);
+  private router = inject(Router);
+
   loginForm: FormGroup;
   errorMessage = signal<string | null>(null);
   showLoginForm = true;
@@ -46,12 +49,12 @@ export class LoginComponent {
     if (this.loginForm.valid) {
       this.authService.login(this.loginForm.value).subscribe({
         next: (user) => {
-          console.log('Login successful', user);
-          this.errorMessage.set(null); // Очищаємо повідомлення про помилку
+          this.errorMessage.set(null);
+          this.router.navigate(['/main']);
         },
         error: (err) => {
           console.error('Login failed', err);
-          this.errorMessage.set('Invalid email or password. Please try again.'); // Встановлюємо помилку
+          this.errorMessage.set('Invalid email or password. Please try again.');
         },
       });
     }

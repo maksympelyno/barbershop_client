@@ -3,6 +3,7 @@ import { Component, computed, inject, OnInit, signal } from '@angular/core';
 import { ClientsService } from '../../services/client.service';
 import { ClientItemComponent } from './client-item/client-item.component';
 import { AddClientModalComponent } from '../../modals/add-client-modal/add-client-modal.component';
+import { CLIENTS_PER_PAGE } from '../../constants/client.constant';
 
 @Component({
   selector: 'app-clients',
@@ -15,9 +16,8 @@ export class ClientsComponent implements OnInit {
   isModalOpen = false;
 
   page = signal<number>(1);
-  itemsPerPage = 8;
   totalPages = computed(() => {
-    return Math.ceil(this.clients.length / this.itemsPerPage);
+    return Math.ceil(this.clients.length / CLIENTS_PER_PAGE);
   });
 
   ngOnInit() {
@@ -29,8 +29,8 @@ export class ClientsComponent implements OnInit {
   }
 
   get paginatedClients() {
-    const startIndex = (this.page() - 1) * this.itemsPerPage;
-    const endIndex = startIndex + this.itemsPerPage;
+    const startIndex = (this.page() - 1) * CLIENTS_PER_PAGE;
+    const endIndex = startIndex + CLIENTS_PER_PAGE;
     return this.clients.slice(startIndex, endIndex);
   }
 

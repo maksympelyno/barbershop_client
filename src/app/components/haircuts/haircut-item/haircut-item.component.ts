@@ -1,4 +1,4 @@
-import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { Haircut } from '../../../models/haircut.model';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';

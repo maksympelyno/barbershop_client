@@ -29,7 +29,6 @@ export class AddHaircutModalComponent {
       name: ['', [Validators.required, Validators.minLength(3)]],
       gender: ['male', [Validators.required]],
       price: [0, [Validators.required, Validators.min(1)]],
-      branch: ['67a348bc357f74009a2c41c1'],
     });
   }
 

@@ -1,6 +1,6 @@
 import { Component, computed, inject } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
-import { Router, RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -11,14 +11,11 @@ import { CommonModule } from '@angular/common';
 })
 export class HeaderComponent {
   private authService = inject(AuthService);
-  private router = inject(Router);
+
+  userName = computed(() => this.authService.getUserName());
+  isAuthenticated = computed(() => this.authService.isAuthenticated());
 
   isMenuOpen = false;
-
-  currentUser = computed(() => {
-    console.log(this.authService.currentUser()?.name);
-    return this.authService.currentUser();
-  });
 
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;

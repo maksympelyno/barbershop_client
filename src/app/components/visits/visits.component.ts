@@ -3,6 +3,7 @@ import { Component, computed, inject, signal } from '@angular/core';
 import { VisitsService } from '../../services/visit.service';
 import { VisitListComponent } from './visit-list/visit-list.component';
 import { AddVisitModalComponent } from '../../modals/add-visit-modal/add-visit-modal.component';
+import { VISITS_PER_PAGE } from '../../constants/visit.constants';
 
 @Component({
   selector: 'app-visits',
@@ -15,13 +16,13 @@ export class VisitsComponent {
   isModalOpen = false;
 
   page = signal<number>(1);
-  itemsPerPage = 5;
+
   totalPages = computed(() => {
-    return Math.ceil(this.visits.length / this.itemsPerPage);
+    return Math.ceil(this.visits.length / VISITS_PER_PAGE);
   });
 
   ngOnInit() {
-    this.visitsService.getVisits();
+    this.visitsService.getVisitsByBranch();
   }
 
   get visits() {
@@ -29,13 +30,13 @@ export class VisitsComponent {
   }
 
   get paginatedVisits() {
-    const startIndex = (this.page() - 1) * this.itemsPerPage;
-    const endIndex = startIndex + this.itemsPerPage;
+    const startIndex = (this.page() - 1) * VISITS_PER_PAGE;
+    const endIndex = startIndex + VISITS_PER_PAGE;
     return this.visits.slice(startIndex, endIndex);
   }
 
   nextPage() {
-    if (this.page() < Math.ceil(this.visits.length / this.itemsPerPage)) {
+    if (this.page() < Math.ceil(this.visits.length / VISITS_PER_PAGE)) {
       this.page.update((p) => p + 1);
     }
   }
