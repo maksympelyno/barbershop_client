@@ -9,12 +9,10 @@ export class BranchService {
   branches = signal<any[]>([]);
 
   constructor(private http: HttpClient) {
-    this.getBranches();
+    this.getBranches().subscribe((data) => this.branches.set(data));
   }
 
   getBranches() {
-    this.http
-      .get<any[]>(this.baseUrl)
-      .subscribe((data) => this.branches.set(data));
+    return this.http.get<any[]>(this.baseUrl);
   }
 }

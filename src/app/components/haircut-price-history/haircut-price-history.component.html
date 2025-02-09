@@ -1,0 +1,44 @@
+<div>
+  <h2 class="text-2xl font-bold text-black mb-4">Price Change History</h2>
+
+  <table class="min-w-full table-auto bg-gray-800 text-white border-collapse">
+    <thead>
+      <tr>
+        <th class="px-6 py-3 text-center border-b border-gray-600">
+          Change Number
+        </th>
+        <th class="px-6 py-3 text-center border-b border-gray-600">
+          Old Price
+        </th>
+        <th class="px-6 py-3 text-center border-b border-gray-600">
+          New Price
+        </th>
+        <th class="px-6 py-3 text-center border-b border-gray-600">
+          Change Date
+        </th>
+        <th class="px-6 py-3 text-center border-b border-gray-600">
+          Price Difference
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of priceHistory">
+        <td class="px-6 py-3 text-center border-b border-gray-700">
+          {{ item.changeNumber }}
+        </td>
+        <td class="px-6 py-3 text-center border-b border-gray-700">
+          {{ item.oldPrice }}$
+        </td>
+        <td class="px-6 py-3 text-center border-b border-gray-700">
+          {{ item.newPrice }}$
+        </td>
+        <td class="px-6 py-3 text-center border-b border-gray-700">
+          {{ item.changedAt | date : "MMM d, y" }}
+        </td>
+        <td class="px-6 py-3 text-center border-b border-gray-700">
+          {{ item.priceDifference }}$
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
