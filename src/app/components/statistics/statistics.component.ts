@@ -1,5 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
-import { StatisticsService } from '../../services/statistics.service';
+import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BranchService } from '../../services/branch.service';
 import { StatisticsBranchComponent } from './statistics-branch/statistics-branch.component';

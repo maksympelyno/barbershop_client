@@ -3,6 +3,7 @@ import { HaircutsService } from '../../services/haircut.service';
 import { CommonModule } from '@angular/common';
 import { HaircutItemComponent } from './haircut-item/haircut-item.component';
 import { AddHaircutModalComponent } from '../../modals/add-haircut-modal/add-haircut-modal.component';
+import { HAIRCUTS_PER_PAGE } from '../../constants/haircut.constants';
 
 @Component({
   selector: 'app-haircuts',
@@ -15,9 +16,8 @@ export class HaircutsComponent {
   isModalOpen = false;
 
   page = signal<number>(1);
-  itemsPerPage = 15;
   totalPages = computed(() => {
-    return Math.ceil(this.haircuts.length / this.itemsPerPage);
+    return Math.ceil(this.haircuts.length / HAIRCUTS_PER_PAGE);
   });
 
   ngOnInit() {
@@ -29,8 +29,8 @@ export class HaircutsComponent {
   }
 
   get paginatedHaircuts() {
-    const startIndex = (this.page() - 1) * this.itemsPerPage;
-    const endIndex = startIndex + this.itemsPerPage;
+    const startIndex = (this.page() - 1) * HAIRCUTS_PER_PAGE;
+    const endIndex = startIndex + HAIRCUTS_PER_PAGE;
     return this.haircuts.slice(startIndex, endIndex);
   }
 

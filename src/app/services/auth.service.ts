@@ -1,12 +1,14 @@
 import { Injectable, signal, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { map } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
+import { API_ENDPOINTS, BASE_URL } from '../constants/api-endpoints';
 
 interface User {
-  email: string;
   name: string;
-  token: string;
+  access_token: string;
+  role: string;
+  branchId: string;
 }
 
 interface Login {
@@ -20,37 +22,58 @@ interface Login {
 export class AuthService {
   private http = inject(HttpClient);
   private router = inject(Router);
-  private baseUrl = 'http://localhost:5000/auth/';
+  private baseUrl = BASE_URL + API_ENDPOINTS.AUTH;
 
-  currentUser = signal<User | null>(this.loadUser());
+  username = signal<string>(localStorage.getItem('name') || '');
+  role = signal<string>(localStorage.getItem('role') || '');
+  branchId = signal<string>(localStorage.getItem('branchId') || '');
+  isAuthenticatedSignal = signal<boolean>(!!localStorage.getItem('token'));
 
   login(model: Login) {
-    return this.http.post<User>(this.baseUrl + 'login', model).pipe(
-      map((user) => {
-        if (user) this.setCurrentUser(user);
-        return user;
+    return this.http.post<User>(this.baseUrl, model).pipe(
+      tap((response) => {
+        this.username.set(response.name);
+        this.role.set(response.role);
+        this.branchId.set(response.branchId);
+        this.isAuthenticatedSignal.set(true);
+
+        localStorage.setItem('token', response.access_token);
+        localStorage.setItem('role', response.role);
+        localStorage.setItem('name', response.name);
+        localStorage.setItem('branchId', response.branchId);
+
+        this.router.navigate(['/main']);
       })
     );
   }
 
   logout() {
-    localStorage.removeItem('user');
-    this.currentUser.set(null);
+    this.username.set('');
+    this.role.set('');
+    this.branchId.set('');
+    this.isAuthenticatedSignal.set(false);
+
+    localStorage.removeItem('token');
+    localStorage.removeItem('role');
+    localStorage.removeItem('name');
+    localStorage.removeItem('branchId');
+
     this.router.navigate(['/login']);
   }
 
-  private setCurrentUser(user: User) {
-    localStorage.setItem('user', JSON.stringify(user));
-    this.currentUser.set(user);
-    this.router.navigate(['/main']);
-  }
-
-  private loadUser(): User | null {
-    const storedUser = localStorage.getItem('user');
-    return storedUser ? JSON.parse(storedUser) : null;
-  }
-
   isAuthenticated(): boolean {
-    return !!this.currentUser();
+    return this.isAuthenticatedSignal();
+  }
+
+  getRole(): string {
+    return this.role();
+  }
+
+  getUserName(): string {
+    return this.username();
+  }
+
+  getBranchId(): string {
+    return this.branchId();
   }
 }
