@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
+import { HaircutPriceHistory } from '../../models/haircut.model';
 
 @Component({
   selector: 'app-haircut-price-history',
@@ -8,5 +9,5 @@ import { Component, Input } from '@angular/core';
   styleUrl: './haircut-price-history.component.css',
 })
 export class HaircutPriceHistoryComponent {
-  @Input() priceHistory: any[] = [];
+  @Input() priceHistory: HaircutPriceHistory[] = [];
 }

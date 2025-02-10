@@ -9,6 +9,8 @@ import { VisitsService } from '../../services/visit.service';
 import { ClientsService } from '../../services/client.service';
 import { HaircutsService } from '../../services/haircut.service';
 import { CommonModule } from '@angular/common';
+import { Client } from '../../models/client.model';
+import { Haircut } from '../../models/haircut.model';
 
 @Component({
   selector: 'app-add-visit-modal',
@@ -32,8 +34,8 @@ export class AddVisitModalComponent {
     date: ['', Validators.required],
   });
 
-  clientsForSelect = signal<any[]>([]);
-  haircutsForSelect = signal<any[]>([]);
+  clientsForSelect = signal<Client[]>([]);
+  haircutsForSelect = signal<Haircut[]>([]);
   errorMessage = signal<string | null>(null);
 
   ngOnInit() {
@@ -42,7 +44,7 @@ export class AddVisitModalComponent {
   }
 
   loadClients() {
-    this.clientsService.getClientsObs().subscribe({
+    this.clientsService.getClientsObservable().subscribe({
       next: (haircuts) => this.clientsForSelect.set(haircuts),
       error: () => this.errorMessage.set('Error fetching haircuts'),
     });

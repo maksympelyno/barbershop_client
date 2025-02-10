@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { HaircutItemComponent } from './haircut-item/haircut-item.component';
 import { AddHaircutModalComponent } from '../../modals/add-haircut-modal/add-haircut-modal.component';
 import { HAIRCUTS_PER_PAGE } from '../../constants/haircut.constants';
+import { Haircut } from '../../models/haircut.model';
 
 @Component({
   selector: 'app-haircuts',
@@ -24,11 +25,11 @@ export class HaircutsComponent {
     this.haircutsService.getHaircuts();
   }
 
-  get haircuts() {
+  get haircuts(): Haircut[] {
     return this.haircutsService.haircuts();
   }
 
-  get paginatedHaircuts() {
+  get paginatedHaircuts(): Haircut[] {
     const startIndex = (this.page() - 1) * HAIRCUTS_PER_PAGE;
     const endIndex = startIndex + HAIRCUTS_PER_PAGE;
     return this.haircuts.slice(startIndex, endIndex);

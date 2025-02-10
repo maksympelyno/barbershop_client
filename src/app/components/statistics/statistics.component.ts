@@ -1,10 +1,12 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, signal, WritableSignal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BranchService } from '../../services/branch.service';
 import { StatisticsBranchComponent } from './statistics-branch/statistics-branch.component';
 import { HaircutPriceHistoryComponent } from '../haircut-price-history/haircut-price-history.component';
 import { HaircutsService } from '../../services/haircut.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { Haircut, HaircutPriceHistory } from '../../models/haircut.model';
+import { Branch } from '../../models/branch.model';
 
 @Component({
   selector: 'app-statistics',
@@ -24,17 +26,11 @@ export class StatisticsComponent {
 
   selectedBranchId = signal<string>('');
   selectedHaircutId = signal<string>('');
-  haircutsForSelect = signal<any[]>([]);
-  branches = signal<any[]>([]);
-  priceHistoryData = signal<any[]>([]);
-
+  haircutsForSelect = signal<Haircut[]>([]);
+  branches = signal<Branch[]>([]);
+  priceHistoryData = signal<HaircutPriceHistory[]>([]);
   form: FormGroup = this.fb.group({ haircutSearch: [''], haircutId: [''] });
-
   selectedTab = signal<'branches' | 'haircuts'>('branches');
-
-  setTab(tab: 'branches' | 'haircuts') {
-    this.selectedTab.set(tab);
-  }
 
   ngOnInit() {
     this.loadBranches();
@@ -72,5 +68,9 @@ export class StatisticsComponent {
 
   onBranchChange(event: Event) {
     this.selectedBranchId.set((event.target as HTMLSelectElement).value);
+  }
+
+  setTab(tab: 'branches' | 'haircuts') {
+    this.selectedTab.set(tab);
   }
 }

@@ -15,9 +15,10 @@ import { CommonModule } from '@angular/common';
   styleUrl: './add-client-modal.component.css',
 })
 export class AddClientModalComponent {
+  @Output() close = new EventEmitter<void>();
+
   private clientsService = inject(ClientsService);
   private fb = inject(FormBuilder);
-  @Output() close = new EventEmitter<void>();
 
   errorMessage = signal<string | null>(null);
 
