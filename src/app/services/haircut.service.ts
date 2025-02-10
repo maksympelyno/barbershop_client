@@ -44,11 +44,15 @@ export class HaircutsService {
     });
   }
 
-  searchHaircuts(name: string): Observable<Haircut[]> {
+  searchHaircutsByBranch(name: string): Observable<Haircut[]> {
     const branchId: string = this.authService.getBranchId();
     return this.http.get<Haircut[]>(
       `${this.baseUrl}/branch/${branchId}?name=${name}`
     );
+  }
+
+  searchHaircutsByName(name: string): Observable<Haircut[]> {
+    return this.http.get<Haircut[]>(`${this.baseUrl}/name?name=${name}`);
   }
 
   getHaircutsByBranch(): Observable<Haircut[]> {

@@ -75,7 +75,7 @@ export class AddVisitModalComponent {
       this.loadHaircuts();
       return;
     }
-    this.haircutsService.searchHaircuts(name).subscribe({
+    this.haircutsService.searchHaircutsByBranch(name).subscribe({
       next: (haircuts) => this.haircutsForSelect.set(haircuts),
       error: () => this.errorMessage.set('Error fetching haircuts'),
     });

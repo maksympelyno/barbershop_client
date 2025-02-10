@@ -46,7 +46,7 @@ export class StatisticsComponent {
     const name = this.form.value.haircutSearch;
     if (!name) return;
 
-    this.haircutService.searchHaircuts(name).subscribe((haircuts) => {
+    this.haircutService.searchHaircutsByName(name).subscribe((haircuts) => {
       this.haircutsForSelect.set(haircuts);
     });
   }
