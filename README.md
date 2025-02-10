@@ -1,58 +1,45 @@
-# BarbershopManagementClient
+# Barbershop Management 
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.6.
 
-## Development server
 
-To start a local development server, run:
+## Video of the application and its functionality
+https://github.com/user-attachments/assets/1a111c22-47ab-421d-9066-fb3cb8c0cf05
 
-```bash
-ng serve
-```
+## Implemented Functionality  
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+### Authentication & Authorization  
+- JWT-based authentication.  
+- Two user roles: **Manager** and **Admin**.  
 
-## Code scaffolding
+### Manager Capabilities  
+- Assigned to a specific branch.  
+- Can view haircuts, edit their price and name, and add new haircuts.  
+- Can view clients and add new clients.  
+- Can view completed visits sorted by date, including client details, haircut details, and visit date.  
+- Can add new visits by selecting a client and haircuts from a searchable dropdown.  
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+### Admin Capabilities  
+- Access to the **Statistics** section.  
+- Can analyze statistics for a specific branch, including client count, revenue, and related metrics.  
+- Can view the price change history for each haircut.  
 
-```bash
-ng generate component component-name
-```
+### Responsive Design  
+- Fully responsive UI, optimized for smartphones and tablets.  
+- Implemented using **Tailwind CSS** for adaptive layouts and smooth user experience.
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+  
+## Installation
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/maksympelyno/barbershop_client
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+3. Run:
+   ```bash
+   ng serve
 
 ## Additional Resources
 
