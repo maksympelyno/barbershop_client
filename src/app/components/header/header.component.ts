@@ -1,4 +1,4 @@
-import { Component, computed, inject } from '@angular/core';
+import { Component, computed, inject, Signal } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -12,8 +12,10 @@ import { CommonModule } from '@angular/common';
 export class HeaderComponent {
   private authService = inject(AuthService);
 
-  userName = computed(() => this.authService.getUserName());
-  isAuthenticated = computed(() => this.authService.isAuthenticated());
+  userName: Signal<string> = computed(() => this.authService.getUserName());
+  isAuthenticated: Signal<boolean> = computed(() =>
+    this.authService.isAuthenticated()
+  );
 
   isMenuOpen = false;
 

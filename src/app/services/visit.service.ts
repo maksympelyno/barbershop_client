@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { catchError, Observable, tap } from 'rxjs';
 import { AuthService } from './auth.service';
 import { API_ENDPOINTS, BASE_URL } from '../constants/api-endpoints';
-import { Visit, VisitDTO, VisitForm } from '../models/visit.model';
+import { Visit, VisitDTO, VisitForm, VisitInfo } from '../models/visit.model';
 
 @Injectable({
   providedIn: 'root',
@@ -12,13 +12,15 @@ export class VisitsService {
   private authService = inject(AuthService);
   private baseUrl = BASE_URL + API_ENDPOINTS.VISIT;
 
-  visits = signal<Visit[]>([]);
+  visits = signal<VisitInfo[]>([]);
 
   constructor(private http: HttpClient) {}
 
   getVisitsByBranch(): void {
     this.http
-      .get<Visit[]>(`${this.baseUrl}branch/${this.authService.getBranchId()}`)
+      .get<VisitInfo[]>(
+        `${this.baseUrl}branch/${this.authService.getBranchId()}`
+      )
       .subscribe((data) => this.visits.set(data));
   }
 

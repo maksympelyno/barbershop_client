@@ -24,7 +24,7 @@ export class LoginComponent {
 
   loginForm: FormGroup;
   errorMessage = signal<string | null>(null);
-  showLoginForm = true;
+  showLoginForm: boolean = true;
 
   constructor() {
     this.loginForm = this.fb.group({

@@ -3,18 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { tap } from 'rxjs/operators';
 import { API_ENDPOINTS, BASE_URL } from '../constants/api-endpoints';
-
-interface User {
-  name: string;
-  access_token: string;
-  role: string;
-  branchId: string;
-}
-
-interface Login {
-  email: string;
-  password: string;
-}
+import { Login, User } from '../models/auth.model';
 
 @Injectable({
   providedIn: 'root',
